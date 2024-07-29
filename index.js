@@ -3,11 +3,17 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const socket = require("socket.io");
 const crypto = require('crypto');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
+
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'utils')));
+
 var port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
