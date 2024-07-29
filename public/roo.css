@@ -1,0 +1,185 @@
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: calc(100vw - 40px);
+    /* 20px space on both sides */
+    margin: 20px auto;
+    height: calc(100vh - 40px);
+    /* 20px space on top and bottom */
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.window {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    /* Allow the window to take full width */
+    width: 100%;
+    /* Make the window take full width */
+    height: 100%;
+    /* Make the window take full height */
+    margin: 20px;
+    padding: 20px;
+}
+
+.chat-message {
+    overflow-y: scroll;
+    max-height: 400px;
+    padding-right: 10px;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message p {
+    background-color: #dcf8c6;
+    /* Light green background color similar to WhatsApp */
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    max-width: 70%;
+    clear: both;
+    /* Adjust the maximum width of the message box */
+}
+.chat-message p.right-align {
+    background-color: #dcf8c6; /* Light green background color similar to WhatsApp */
+    float: right; /* Float your messages to the right side */
+    clear: both; /* Clear the float to prevent layout issues */
+}
+
+/* Style for other users' chat messages */
+.chat-message p.left-align {
+    background-color: #dcf8c6; /* White background color for others' messages */
+    float: left; /* Float others' messages to the left side */
+    clear: both; /* Clear the float to prevent layout issues */
+}
+.chat-message p strong {
+    color: #075e54;
+    /* WhatsApp's chat color */
+}
+
+#feedback p em {
+    color: #888;
+}
+
+#output {
+    margin-bottom: 10px;
+}
+
+.fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-top: 20px; */
+}
+
+textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.online {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.users-online {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.users {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.users p {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.users p:hover {
+    background-color: #e2e2e2;
+}
+
+.right-side {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.join-message {
+    font-size: 16px;
+    color: #333;
+}
+@media (max-width: 600px) {
+    /* Add styles for small screens here */
+    .window, .online, .right-side {
+        max-width: 100%;
+    }
+    .fields {
+        /* flex-direction: column; */
+        align-items: stretch;
+    }
+    textarea {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        flex: 1;
+        margin-right: 10px;
+    }
+    .chat-message {
+        overflow-y: scroll;
+        max-height: 400px;
+        padding-right: 10px;
+        height: -webkit-fill-available;
+        display: flex;
+        flex-direction: column;
+    }
+}
+/* ... Your existing CSS ... */
+
+/* Media Query for small screens */
+

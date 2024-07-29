@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat APP</title>
+    <link rel="stylesheet" href="/roo.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Left Side - Online Users Box -->
+      <div class="online">
+          <p class="users-online">Users Online</p>
+          <div class="users"></div>
+          <div class="users-join"></div>
+      </div>
+
+      <!-- Middle - Message Box -->
+      <div class="window">
+        <h1 class="room-message">Chat Room</h1>
+        <div class="chat-message">
+            <div id="output"></div>
+            <div id="feedback"></div>
+        </div>
+        <div class="fields">
+            <!-- <input type="text" id="message" placeholder="Enter message" autocomplete="off" /> -->
+            <textarea id="message" placeholder="Enter message" autocomplete="off" required></textarea>
+            <button id="send">Send</button>
+        </div>
+    </div>
+
+      <!-- Right Side - Join Room Message -->
+      <!-- <div class="right-side">
+          <p class="join-message">XYZ joined the room</p>
+      </div> -->
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.js"></script>
+    <script src="/chat.js"></script>
+  </body>
+</html>
