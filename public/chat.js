@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersjoin = document.querySelector(".users-join");
 
   const url = new URL(window.location.href);
-  const socket = io.connect('https://chatapp-main-psi.vercel.app');
+  const socket = io.connect(url.host);
   console.log(url.host);
 
   fetch("/get-username-roomname")
