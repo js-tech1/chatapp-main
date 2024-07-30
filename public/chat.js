@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const url = new URL(window.location.href);
   const protocol = url.protocol === 'https:' ? 'wss' : 'ws';
   const socket = io.connect(`${protocol}://${url.host}`);
-  console.log(url
-  );
+  // console.log(url
+  // );
 
   fetch("/get-username-roomname")
     .then(response => response.json())
     .then(data => {
       const { username, roomname } = data;
-      console.log("fetch", username, roomname);
+      // console.log("fetch", username, roomname);
 
       // Initialize chat
       const chat = new Chat(username, roomname);
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initializeChat() {
-      console.log("Initializing chat for", this.username, "in room", this.roomname);
+      // console.log("Initializing chat for", this.username, "in room", this.roomname);
     }
   }
 

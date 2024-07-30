@@ -55,13 +55,13 @@ app.post('/room', (req, res) => {
 });
 app.get("/get-username-roomname", (req, res) => {
   const { username, roomname } = req.session;
-  console.log("get", username); // Assuming you stored them in the session
+  // console.log("get", username); // Assuming you stored them in the session
   res.json({ username, roomname });
 });
 app.get('/room', (req, res) => {
   // Access the stored username and roomname from the session
   const { username, roomname } = req.session;
-  console.log(username, roomname);
+  // console.log(username, roomname);
   // Render your room template with the username and roomname
   res.render('room', { username, roomname });
 });
