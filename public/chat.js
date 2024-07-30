@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const socketUrl = `${url.protocol}//${url.host}`;
   console.log("Connecting to socket at:", socketUrl);
 
-  const socket = io(socketUrl, { path: '/socket.io', secure: true });
+  const socket = io(socketUrl, { path: '/socket.io', secure: true, transports: ['websocket'] });
   console.log("Socket connection established:", socket);
 
   fetch("/get-username-roomname")
