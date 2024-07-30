@@ -7,11 +7,8 @@
   command = "npm start"
   port = 3000
 
-[build.environment]
-  NODE_ENV = "production"
-
 [[redirects]]
   from = "/(.*)"
-  to = "/index.js"
+  to = "index.js"
   status = 200
   force = true
