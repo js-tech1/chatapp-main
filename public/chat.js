@@ -96,6 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('WebSocket connection error:', error);
       });
 
+      socket.on('disconnect', (reason) => {
+        console.warn('Disconnected from WebSocket server. Reason:', reason);
+        // Optionally, implement logic to notify the user or attempt reconnection
+      });
+
+      // Handle reconnection attempts
+      socket.on('reconnect_attempt', (attemptNumber) => {
+        console.log(`Attempting to reconnect... Attempt number: ${attemptNumber}`);
+        // Optionally, you can show a reconnecting message to the user
+      });
+
+      // Handle successful reconnections
+      socket.on('reconnect', (attemptNumber) => {
+        console.log(`Reconnected successfully after attempt number: ${attemptNumber}`);
+        // Optionally, you can update the UI to reflect the reconnection status
+      });
     })
     .catch(error => console.error("Error fetching username and roomname:", error));
 
