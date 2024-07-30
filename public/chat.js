@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const url = new URL(window.location.href);
   const socket = io.connect(url.href, { secure: true });
-  console.log(url);
+  // console.log(url);
 
   fetch("/get-username-roomname")
     .then(response => response.json())
