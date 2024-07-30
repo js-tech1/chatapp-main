@@ -1,0 +1,16 @@
+[build]
+  command = "npm start"
+  publish = "public"
+
+[dev]
+  command = "npm start"
+  port = 3000
+
+[build.environment]
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/(.*)"
+  to = "/index.js"
+  status = 200
+  force = true
