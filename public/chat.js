@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersjoin = document.querySelector(".users-join");
 
   const url = new URL(window.location.href);
-  const socket = io.connect(url.href, { secure: true });
+  const socket = io.connect(url.href, { path: '/socket.io', secure: true });
   // console.log(url);
 
   fetch("/get-username-roomname")
