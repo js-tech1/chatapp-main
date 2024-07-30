@@ -39,9 +39,7 @@ const io = socket(server, { // Initialize socket.io with the server
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    credentials: true
   },
-  http: true,
 });
 require("./utils/socket")(io);
 
