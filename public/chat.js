@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersjoin = document.querySelector(".users-join");
 
   const url = new URL(window.location.href);
-  const socket = io.connect(`ws://${url.host}`);
+  const protocol = url.protocol === 'https:' ? 'wss' : 'ws';
+  const socket = io.connect(`${protocol}://${url.host}`);
   console.log(url.host);
 
   fetch("/get-username-roomname")
