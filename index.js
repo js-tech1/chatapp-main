@@ -32,13 +32,26 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use((req, res, next) => {
+  const url = new URL(req.headers.origin);
+  const allowedOrigin = `${url.protocol}//${url.host}`;
+  cors({
+    origin: allowedOrigin,
+    methods: ["GET", "POST"],
+    credentials: true
+  })(req, res, next);
+});
 
 const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server Running on 3000`);
 });
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
-    origin: url.host,
+    origin: (origin, callback) => {
+      const url = new URL(origin);
+      const allowedOrigin = `${url.protocol}//${url.host}`;
+      callback(null, allowedOrigin);
+    },
     methods: ["GET", "POST"]
   }
 });
