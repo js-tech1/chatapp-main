@@ -34,6 +34,7 @@ app.use(session({
 const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server Running on 3000`);
 });
+app.use(cors());
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
     origin: "*",
