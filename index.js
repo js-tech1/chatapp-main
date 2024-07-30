@@ -40,6 +40,7 @@ const io = socket(server, { // Initialize socket.io with the server
     origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
+    transports: ['websocket']
   },
   http: true,
 });
