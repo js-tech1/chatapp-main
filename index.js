@@ -32,44 +32,13 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-app.use((req, res, next) => {
-  try {
-    if (req.headers.origin) {
-      const url = new URL(req.headers.origin);
-      const allowedOrigin = `${url.protocol}//${url.host}`;
-      cors({
-        origin: allowedOrigin,
-        methods: ["GET", "POST"],
-        credentials: true
-      })(req, res, next);
-    } else {
-      next();
-    }
-  } catch (error) {
-    console.error('Error setting CORS:', error);
-    next();
-  }
-});
 
 const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server Running on 3000`);
 });
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
-    origin: (origin, callback) => {
-      try {
-        if (origin) {
-          const url = new URL(origin);
-          const allowedOrigin = `${url.protocol}//${url.host}`;
-          callback(null, allowedOrigin);
-        } else {
-          callback(null, '*'); // Allow all origins if origin is null
-        }
-      } catch (error) {
-        console.error('Error setting Socket.io CORS:', error);
-        callback(error, false);
-      }
-    },
+    origin: '*',
     methods: ["GET", "POST"]
   }
 });
@@ -103,6 +72,3 @@ app.get('/room', (req, res) => {
   // Render your room template with the username and roomname
   res.render('room', { username, roomname });
 });
-
-
-
