@@ -9,8 +9,6 @@ const cors = require('cors');
 
 const app = express();
 
-const url = new URL(window.location.href);
-console.log(url.host);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,7 +36,7 @@ const server = app.listen(port, '0.0.0.0', () => {
 });
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
-    origin: '*',
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
@@ -72,3 +70,6 @@ app.get('/room', (req, res) => {
   // Render your room template with the username and roomname
   res.render('room', { username, roomname });
 });
+
+
+
