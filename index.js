@@ -7,10 +7,7 @@ const path = require('path');
 const cors = require('cors');
 
 
-
 const app = express();
-
-app.use(cors());
 
 
 
@@ -37,7 +34,12 @@ app.use(session({
 const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server Running on 3000`);
 });
-const io = socket(server);
+const io = socket(server, { // Initialize socket.io with the server
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 require("./utils/socket")(io);
 
 // app.post("/room", (req, res) => {
