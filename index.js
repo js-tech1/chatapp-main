@@ -4,8 +4,10 @@ const session = require('express-session');
 const socket = require("socket.io");
 const crypto = require('crypto');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 
 

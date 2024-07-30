@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const url = new URL(window.location.href);
   const protocol = url.protocol === 'https:' ? 'wss' : 'ws';
   const socket = io.connect(`${protocol}://${url.host}`);
-  console.log(url.host);
+  console.log(url
+  );
 
   fetch("/get-username-roomname")
     .then(response => response.json())
