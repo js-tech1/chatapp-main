@@ -29,11 +29,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+const server = http.createServer(app);
 
-
-const server = app.listen(port, '0.0.0.0', () => {
-  console.log(`Server Running on 3000`);
-});
 app.use(cors());
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
@@ -41,6 +38,11 @@ const io = socket(server, { // Initialize socket.io with the server
     methods: ["GET", "POST"],
   },
 });
+
+server = app.listen(port, '0.0.0.0', () => {
+  console.log(`Server Running on 3000`);
+});
+
 require("./utils/socket")(io);
 
 // app.post("/room", (req, res) => {

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const socketUrl = `${url.protocol}//${url.host}`;
   console.log("Connecting to socket at:", socketUrl);
 
-  const socket = io(socketUrl, { path: '/socket.io', secure: true });
+  const socket = io(socketUrl, { transports: ['websocket'] });
   console.log("Socket connection established:", socket);
 
   fetch("/get-username-roomname")
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Optionally, you can update the UI to reflect the reconnection status
       });
     })
-    .catch(error => console.error("Error fetching username and roomname:", error));
+    .catch(error => console.log("Error fetching username and roomname:", error));
 
   class Chat {
     constructor(username, roomname) {
