@@ -37,8 +37,11 @@ const server = app.listen(port, '0.0.0.0', () => {
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
     origin: "*",
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+    credentials: true,
+    transports: ['websocket', 'polling'],
+  },
+  allowEIO3: true
 });
 require("./utils/socket")(io);
 
