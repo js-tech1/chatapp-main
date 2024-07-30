@@ -8,11 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersjoin = document.querySelector(".users-join");
 
   const url = new URL(window.location.href);
-  const socketUrl = `${url.protocol}//${url.host}`;
-  console.log("Connecting to socket at:", socketUrl);
-
-  const socket = io(socketUrl, { transports: ['websocket'] });
-  console.log("Socket connection established:", socket);
+  const socket = io.connect(url.host);
+  console.log(url.host);
 
   fetch("/get-username-roomname")
     .then(response => response.json())
@@ -92,28 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
           usersElement.innerHTML += `<p>${user}</p>`;
         });
       });
-      socket.on('connect_error', (error) => {
-        console.log('WebSocket connection error:', error);
-      });
 
-      socket.on('disconnect', (reason) => {
-        console.warn('Disconnected from WebSocket server. Reason:', reason);
-        // Optionally, implement logic to notify the user or attempt reconnection
-      });
-
-      // Handle reconnection attempts
-      socket.on('reconnect_attempt', (attemptNumber) => {
-        console.log(`Attempting to reconnect... Attempt number: ${attemptNumber}`);
-        // Optionally, you can show a reconnecting message to the user
-      });
-
-      // Handle successful reconnections
-      socket.on('reconnect', (attemptNumber) => {
-        console.log(`Reconnected successfully after attempt number: ${attemptNumber}`);
-        // Optionally, you can update the UI to reflect the reconnection status
-      });
     })
-    .catch(error => console.log("Error fetching username and roomname:", error));
+    .catch(error => console.error("Error fetching username and roomname:", error));
 
   class Chat {
     constructor(username, roomname) {

@@ -4,8 +4,6 @@ const session = require('express-session');
 const socket = require("socket.io");
 const crypto = require('crypto');
 const path = require('path');
-const cors = require('cors');
-
 
 const app = express();
 
@@ -29,20 +27,12 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
-const server = http.createServer(app);
 
-app.use(cors());
-const io = socket(server, { // Initialize socket.io with the server
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
 
-server = app.listen(port, '0.0.0.0', () => {
+const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Server Running on 3000`);
 });
-
+const io = socket(server);
 require("./utils/socket")(io);
 
 // app.post("/room", (req, res) => {
