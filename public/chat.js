@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
           usersElement.innerHTML += `<p>${user}</p>`;
         });
       });
+      socket.on('connect_error', (error) => {
+        console.log('WebSocket connection error:', error);
+      });
 
     })
     .catch(error => console.error("Error fetching username and roomname:", error));
