@@ -33,13 +33,22 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-  const url = new URL(req.headers.origin);
-  const allowedOrigin = `${url.protocol}//${url.host}`;
-  cors({
-    origin: allowedOrigin,
-    methods: ["GET", "POST"],
-    credentials: true
-  })(req, res, next);
+  try {
+    if (req.headers.origin) {
+      const url = new URL(req.headers.origin);
+      const allowedOrigin = `${url.protocol}//${url.host}`;
+      cors({
+        origin: allowedOrigin,
+        methods: ["GET", "POST"],
+        credentials: true
+      })(req, res, next);
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error('Error setting CORS:', error);
+    next();
+  }
 });
 
 const server = app.listen(port, '0.0.0.0', () => {
@@ -48,9 +57,18 @@ const server = app.listen(port, '0.0.0.0', () => {
 const io = socket(server, { // Initialize socket.io with the server
   cors: {
     origin: (origin, callback) => {
-      const url = new URL(origin);
-      const allowedOrigin = `${url.protocol}//${url.host}`;
-      callback(null, allowedOrigin);
+      try {
+        if (origin) {
+          const url = new URL(origin);
+          const allowedOrigin = `${url.protocol}//${url.host}`;
+          callback(null, allowedOrigin);
+        } else {
+          callback(null, '*'); // Allow all origins if origin is null
+        }
+      } catch (error) {
+        console.error('Error setting Socket.io CORS:', error);
+        callback(error, false);
+      }
     },
     methods: ["GET", "POST"]
   }
