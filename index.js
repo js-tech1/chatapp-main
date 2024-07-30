@@ -29,19 +29,11 @@ app.use(session({
 }));
 
 
-const server = http.createServer(app); // Create an HTTP server
-const io = socket(server, { // Initialize socket.io with the server
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
+const server = app.listen(port, '0.0.0.0', () => {
+  console.log(`Server Running on 3000`);
 });
-
-require("./utils/socket")(io); // Pass the io instance to the socket module
-
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const io = socket(server);
+require("./utils/socket")(io);
 
 // app.post("/room", (req, res) => {
 //   roomname = req.body.roomname;
