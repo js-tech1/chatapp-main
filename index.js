@@ -5,6 +5,7 @@ const socket = require("socket.io");
 const crypto = require('crypto');
 const path = require('path');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(cors());
@@ -37,12 +38,7 @@ const server = app.listen(port, '0.0.0.0', () => {
 const io = socket(server);
 require("./utils/socket")(io);
 
-// app.post("/room", (req, res) => {
-//   roomname = req.body.roomname;
-//   username = req.body.username;
-//   const uniqueIdentifier = Math.floor(Math.random() * 10000);
-//   res.redirect(`/room?username=${username+uniqueIdentifier}&roomname=${roomname}`);
-// });
+
 app.post('/room', (req, res) => {
   const { username, roomname } = req.body;
 
@@ -67,4 +63,17 @@ app.get('/room', (req, res) => {
 });
 
 
+const sendKeepAliveRequest = async () => {
+  try {
+    const response = await axios.get(`https://chatapp-main.onrender.com`);
+    console.log(`Keep-alive request sent. Status: ${response.status}`);
+  } catch (error) {
+    console.error('Error sending keep-alive request:', error);
+  }
+};
 
+// Send keep-alive request every 30 seconds
+setInterval(sendKeepAliveRequest, 30 * 1000);
+
+// Immediately send the first request
+sendKeepAliveRequest();
